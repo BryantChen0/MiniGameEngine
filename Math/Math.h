@@ -1,10 +1,15 @@
-#ifndef MINIGAMEENGINE_CALCULATOR_H
-#define MINIGAMEENGINE_CALCULATOR_H
+#ifndef MINIGAMEENGINE_MATH_H
+#define MINIGAMEENGINE_MATH_H
+#include <cmath>
 //工具类，存放一系列数学工具
 
-template<typename T>
-class Calculator{
-    
-};
+namespace Math {
+    //模板函数，不需要header和source分开存放
+    template<typename T1, typename T2>
+    auto pow(T1 base, T2 exponent){
+        return std::pow(base,exponent);
+    };
+}
 
-#endif //MINIGAMEENGINE_CALCULATOR_H
+
+#endif //MINIGAMEENGINE_MATH_H

@@ -1,5 +1,6 @@
 #ifndef DIFFERENTVECTOR_VECRTOR2_H
 #define DIFFERENTVECTOR_VECRTOR2_H
+//数据类，用于存放坐标
 //这里使用struct，而不是class的原因是vector2是一个数学对象，也就是说
 //如果它的数据被外部直接修改，也不会影响这个对象和它内部函数的逻辑
 //但是如果对象的数据是基于某个规则的，也就是说这个数据如果被随意修改会破坏对于这个对象的定义
@@ -11,7 +12,7 @@ struct Vector2 {
     Vector2 operator+(const Vector2& other) const;
     Vector2 operator*(float scalar) const;
     Vector2 operator-(const Vector2& other) const;
-    float length() const;
+    double length() const;
 };
 
 
