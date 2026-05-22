@@ -2,8 +2,6 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 
-void Object::input() {}
-
 void Object::update(float dt){
     position = position + velocity * dt;
 }

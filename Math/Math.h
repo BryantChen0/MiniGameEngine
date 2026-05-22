@@ -1,7 +1,8 @@
 #ifndef MINIGAMEENGINE_MATH_H
 #define MINIGAMEENGINE_MATH_H
+#pragma once
 #include <cmath>
-//工具类，存放一系列数学工具
+//工具库，存放一系列数学工具
 
 namespace Math {
     //模板函数，不需要header和source分开存放

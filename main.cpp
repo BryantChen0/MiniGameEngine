@@ -1,7 +1,6 @@
-#include "Math/Vector2.h"
-#include "Object.h"
+#include "Core/Object.h"
+#include "System/InputSystem.h"
 #include "iostream"
-#include "Object.h"
 #include <SDL2/SDL.h>
 using namespace std;
 
@@ -9,9 +8,12 @@ int main(){
     //游戏测试类初始化
     Object testObj;
     testObj.position = { 0, 300 };
-    testObj.velocity = { 1, 0 };
+    testObj.velocity = { 0, 0 };
+
+    //输入系统类初始化
+    InputSystem input;
     
-    //i初始化SDL2
+    //初始化SDL2
     SDL_Init(SDL_INIT_VIDEO);//初始化SDL
     SDL_Window* window = SDL_CreateWindow(//创建窗口
         "Mini2D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -32,13 +34,10 @@ int main(){
         lastTime = nowTime;
 
         //输入
-        SDL_Event event;
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                running = false;
-            }
-        }
-        testObj.input();
+        input.update();
+        if (input.isKeyHeld(SDL_SCANCODE_RIGHT)) testObj.velocity.x = 200;
+        if (input.isKeyHeld(SDL_SCANCODE_LEFT))  testObj.velocity.x = -200;
+        if (input.quitRequested()) running = false;
 
         //更新数据
         testObj.update(dt);

@@ -1,19 +1,28 @@
-#ifndef DIFFERENTVECTOR_VECRTOR2_H
-#define DIFFERENTVECTOR_VECRTOR2_H
-//æ•°æ®ç±»ï¼Œç”¨äºå­˜æ”¾åæ ‡
-//è¿™é‡Œä½¿ç”¨structï¼Œè€Œä¸æ˜¯classçš„åŸå› æ˜¯vector2æ˜¯ä¸€ä¸ªæ•°å­¦å¯¹è±¡ï¼Œä¹Ÿå°±æ˜¯è¯´
-//å¦‚æœå®ƒçš„æ•°æ®è¢«å¤–éƒ¨ç›´æ¥ä¿®æ”¹ï¼Œä¹Ÿä¸ä¼šå½±å“è¿™ä¸ªå¯¹è±¡å’Œå®ƒå†…éƒ¨å‡½æ•°çš„é€»è¾‘
-//ä½†æ˜¯å¦‚æœå¯¹è±¡çš„æ•°æ®æ˜¯åŸºäºæŸä¸ªè§„åˆ™çš„ï¼Œä¹Ÿå°±æ˜¯è¯´è¿™ä¸ªæ•°æ®å¦‚æœè¢«éšæ„ä¿®æ”¹ä¼šç ´åå¯¹äºè¿™ä¸ªå¯¹è±¡çš„å®šä¹‰
-//é‚£ä¹ˆå°±ä¸èƒ½è®©å¤–éƒ¨ç›´æ¥ä¿®æ”¹è¿™ä¸ªæ•°æ®ï¼Œåœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œå°±éœ€è¦ä½¿ç”¨classå°†å…¶å˜æˆæ— æ³•è®©å¤–éƒ¨è®¿é—®å’Œä¿®æ”¹çš„æ•°æ®
+#pragma once
+#include "Math.h"
+#include <iostream>
+//×ø±êÊı¾İ½á¹¹
+//ÕâÀïÊ¹ÓÃstruct£¬¶ø²»ÊÇclassµÄÔ­ÒòÊÇvector2ÊÇÒ»¸öÊıÑ§¶ÔÏó£¬Ò²¾ÍÊÇËµ
+//Èç¹ûËüµÄÊı¾İ±»Íâ²¿Ö±½ÓĞŞ¸Ä£¬Ò²²»»áÓ°ÏìÕâ¸ö¶ÔÏóºÍËüÄÚ²¿º¯ÊıµÄÂß¼­
+//µ«ÊÇÈç¹û¶ÔÏóµÄÊı¾İÊÇ»ùÓÚÄ³¸ö¹æÔòµÄ£¬Ò²¾ÍÊÇËµÕâ¸öÊı¾İÈç¹û±»ËæÒâĞŞ¸Ä»áÆÆ»µ¶ÔÓÚÕâ¸ö¶ÔÏóµÄ¶¨Òå
+//ÄÇÃ´¾Í²»ÄÜÈÃÍâ²¿Ö±½ÓĞŞ¸ÄÕâ¸öÊı¾İ£¬ÔÚÕâÖÖÇé¿öÏÂ£¬¾ÍĞèÒªÊ¹ÓÃclass½«Æä±ä³ÉÎŞ·¨ÈÃÍâ²¿·ÃÎÊºÍĞŞ¸ÄµÄÊı¾İ
 
 struct Vector2 {
     float x, y;
 
-    Vector2 operator+(const Vector2& other) const;
-    Vector2 operator*(float scalar) const;
-    Vector2 operator-(const Vector2& other) const;
-    double length() const;
+    Vector2 Vector2::operator+(const Vector2& other) const {
+        return { x + other.x, y + other.y };
+    }
+
+    Vector2 Vector2::operator*(float scalar) const {
+        return { x * scalar, y * scalar };
+    }
+
+    Vector2 Vector2::operator-(const Vector2& other) const {
+        return { x - other.x, y - other.y };
+    }
+
+    double Vector2::length() const {
+        return Math::pow((Math::pow(x, 2) + Math::pow(y, 2)), 0.5);
+    }
 };
-
-
-#endif //DIFFERENTVECTOR_VECRTOR2_H
