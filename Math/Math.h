@@ -1,5 +1,3 @@
-#ifndef MINIGAMEENGINE_MATH_H
-#define MINIGAMEENGINE_MATH_H
 #pragma once
 #include <cmath>
 //工具库，存放一系列数学工具
@@ -11,6 +9,3 @@ namespace Math {
         return std::pow(base,exponent);
     };
 }
-
-
-#endif //MINIGAMEENGINE_MATH_H

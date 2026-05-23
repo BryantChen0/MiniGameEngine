@@ -1,6 +1,7 @@
+#pragma once
 #include <SDL2/SDL.h>
-//输入类，将所有关于SDL的键盘输入封装起来
-//只暴露接口给其他函数调用
+//输入系统类，将所有关于SDL的键盘输入封装起来
+//只暴露接口给其他程序调用
 
 class InputSystem {
 private:

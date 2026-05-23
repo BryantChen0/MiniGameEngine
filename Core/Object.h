@@ -1,5 +1,3 @@
-#ifndef MINIGAMEENGINE_OBJECT_H
-#define MINIGAMEENGINE_OBJECT_H
 #pragma once
 #include "../Math/Vector2.h"
 #include <SDL2/SDL.h>
@@ -12,9 +10,5 @@ public:
 
     //根据时间t的变化，来更新当前时间的位置变动
     void update(float dt);
-    //游戏的渲染结果
-    void render(SDL_Renderer* renderer);
 };
 
-
-#endif //MINIGAMEENGINE_OBJECT_H

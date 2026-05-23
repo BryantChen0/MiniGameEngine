@@ -1,5 +1,6 @@
 #include "Core/Object.h"
 #include "System/InputSystem.h"
+#include "System/RenderSystem.h"
 #include "iostream"
 #include <SDL2/SDL.h>
 using namespace std;
@@ -13,14 +14,16 @@ int main(){
     //输入系统类初始化
     InputSystem input;
     
-    //初始化SDL2
+    //初始化SDL2窗口
+    //从抽象的角度来讲，窗口不应该归于渲染系统，他应该是主程序的运行窗口，所以不放到渲染系统下
     SDL_Init(SDL_INIT_VIDEO);//初始化SDL
     SDL_Window* window = SDL_CreateWindow(//创建窗口
         "Mini2D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
         800, 600, 0);
-    SDL_Renderer* renderer = SDL_CreateRenderer(//创建渲染器
-        window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
-        );
+    
+    //渲染系统类初始化
+    RenderSystem render;
+    render.init(window);
 
     //游戏主循环的配置
     bool running = true;
@@ -42,18 +45,15 @@ int main(){
         //更新数据
         testObj.update(dt);
 
-        //窗口渲染
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);//改变渲染器颜色为黑色
-        SDL_RenderClear(renderer);//使用渲染器作为橡皮擦，将整个缓存区擦成黑色
-
-        //测试类渲染
-        testObj.render(renderer);
-        SDL_RenderPresent(renderer);//输出渲染结果
+        //渲染
+        render.clear({ 255, 255, 255, 255 });
+        render.draw(testObj, { 0, 0, 0, 255 });
+        render.present();
 
     }
 
     //清理缓存
-    SDL_DestroyRenderer(renderer);
+    render.shutdown();
     SDL_DestroyWindow(window);
     SDL_Quit();
 
