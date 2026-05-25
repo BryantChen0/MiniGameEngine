@@ -85,7 +85,6 @@ Input → Update → Render
 * 提供统一接口：
 
     * `update()`
-    * `render()`
 
 ### 物理系统（Physics System）
 
