@@ -11,7 +11,8 @@ add_executable(MiniGameEngine
         "Math/Vector2.h"
         "Core/Object.cpp"
          "System/InputSystem.cpp" 
-         "System/RenderSystem.cpp")
+         "System/RenderSystem.cpp" 
+         "System/PhysicalSystem.cpp")
 
 target_compile_definitions(MiniGameEngine PRIVATE SDL_MAIN_HANDLED)
 

@@ -1,6 +1,7 @@
 #include "Core/Object.h"
 #include "System/InputSystem.h"
 #include "System/RenderSystem.h"
+#include "System/PhysicalSystem.h"
 #include "iostream"
 #include <SDL2/SDL.h>
 using namespace std;
@@ -9,7 +10,8 @@ int main(){
     //游戏测试类初始化
     Object testObj;
     testObj.position = { 0, 300 };
-    testObj.velocity = { 0, 0 };
+    testObj.size = { 80, 40 };
+
 
     //输入系统类初始化
     InputSystem input;
@@ -22,8 +24,10 @@ int main(){
         800, 600, 0);
     
     //渲染系统类初始化
-    RenderSystem render;
-    render.init(window);
+    RenderSystem render(window);
+
+    //物理系统类初始化
+    PhysicalSystem physicalSystem;
 
     //游戏主循环的配置
     bool running = true;
@@ -38,12 +42,15 @@ int main(){
 
         //输入
         input.update();
-        if (input.isKeyHeld(SDL_SCANCODE_RIGHT)) testObj.velocity.x = 200;
-        if (input.isKeyHeld(SDL_SCANCODE_LEFT))  testObj.velocity.x = -200;
+        if (input.isKeyHeld(SDL_SCANCODE_RIGHT)) testObj.velocity.x = 100;
+        if (input.isKeyHeld(SDL_SCANCODE_LEFT))  testObj.velocity.x = -100;
+        if (input.isKeyHeld(SDL_SCANCODE_UP))  testObj.velocity.y = -100;
         if (input.quitRequested()) running = false;
 
         //更新数据
-        testObj.update(dt);
+        physicalSystem.moveObj(testObj, dt);
+        physicalSystem.applyGravity(testObj, dt);
+
 
         //渲染
         render.clear({ 255, 255, 255, 255 });
@@ -53,7 +60,7 @@ int main(){
     }
 
     //清理缓存
-    render.shutdown();
+    render.shutDown();
     SDL_DestroyWindow(window);
     SDL_Quit();
 

@@ -2,6 +2,8 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 
-void Object::update(float dt){
-    position = position + velocity * dt;
+Object::Object() {
+	size = { 0, 0 };
+	position = { 0, 0 };
+	velocity = { 0, 0 };
 }

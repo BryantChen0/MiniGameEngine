@@ -1,6 +1,6 @@
 #include "RenderSystem.h"
 
-void RenderSystem::init(SDL_Window* window) {
+RenderSystem::RenderSystem(SDL_Window* window) {
     renderer = SDL_CreateRenderer(//创建渲染器
         window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
     );
@@ -14,10 +14,11 @@ void RenderSystem::clear(SDL_Color color) {
 
 void RenderSystem::draw(Object obj, SDL_Color color) {
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-    SDL_Rect rect = {
+    SDL_Rect rect = {//长方形的渲染是从左上角的坐标开始以第三个参数为长度，第四个参数为宽度进行绘制
     (int)obj.position.x,
     (int)obj.position.y,
-    40, 40
+    (int)obj.size.x,
+    (int)obj.size.y
     };
     SDL_RenderFillRect(renderer, &rect);
 }
@@ -26,10 +27,10 @@ void RenderSystem::present() {
     SDL_RenderPresent(renderer);
 }
 
-void RenderSystem::shutdown() {
+void RenderSystem::shutDown() {
     SDL_DestroyRenderer(renderer);
 }
 
-SDL_Renderer* RenderSystem::getrenderer() {
+SDL_Renderer* RenderSystem::getRenderer() {
     return renderer;
 }
