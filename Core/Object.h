@@ -9,6 +9,7 @@ public:
     Vector2 position;
     Vector2 velocity;
     Vector2 size;
+    bool onGround = false;
 
     Object();
 };

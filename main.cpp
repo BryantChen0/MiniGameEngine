@@ -6,11 +6,46 @@
 #include <SDL2/SDL.h>
 using namespace std;
 
+void resolveCollision(Object& a, Object& b){
+    //获取中心点
+    float aCenterX = (a.position.x + a.size.x)/2;
+    float aCenterY = (a.position.y + a.size.y)/2;
+    float bCenterX = (b.position.x + b.size.x)/2;
+    float bCenterY = (b.position.y + b.size.y)/2;
+
+    //计算中心点的距离
+    float dx = bCenterX - aCenterX;
+    float dy = bCenterY - aCenterY;
+
+    //计算overlap的长度
+    float overlapX = ((a.size.x / 2) + (b.size.x / 2)) - abs(dx);
+    float overlapY = ((a.size.y / 2) + (b.size.y / 2)) - abs(dy);
+
+    //overlap比较少的方向代表其是最近进入的方向或者说最应该向外推的方向
+    if (overlapX < overlapY) {
+        if (dx > 0) a.position.x -= overlapX;
+        else a.position.x += overlapX;
+        a.velocity.x = 0;
+    }
+    else {
+        if (dy > 0) {
+            //特殊情况，因为从上向下掉，会到达地面，而在地面上的时候，重力加速度不会对物体造成影响
+            a.position.y -= overlapY;
+            a.onGround = true;
+        }
+        else a.position.y += overlapY;
+        a.velocity.y = 0;
+    }
+}
+
 int main(){
     //游戏测试类初始化
     Object testObj;
     testObj.position = { 0, 300 };
     testObj.size = { 80, 40 };
+    Object ground;
+    ground.position = { 0,400 };
+    ground.size = { 800, 200 };
 
 
     //输入系统类初始化
@@ -50,11 +85,14 @@ int main(){
         //更新数据
         physicalSystem.moveObj(testObj, dt);
         physicalSystem.applyGravity(testObj, dt);
-
+        if (physicalSystem.checkCollision(testObj, ground)) 
+            resolveCollision(testObj, ground);
+        
 
         //渲染
         render.clear({ 255, 255, 255, 255 });
         render.draw(testObj, { 0, 0, 0, 255 });
+        render.draw(ground, { 0, 0, 0, 255 });
         render.present();
 
     }
