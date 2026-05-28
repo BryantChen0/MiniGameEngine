@@ -1,4 +1,5 @@
 #include "RenderSystem.h"
+#include "../Core/Object.h"
 
 RenderSystem::RenderSystem(SDL_Window* window) {
     renderer = SDL_CreateRenderer(//´´½¨äÖÈ¾Æ÷

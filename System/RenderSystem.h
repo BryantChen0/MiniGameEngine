@@ -1,8 +1,8 @@
 #pragma once
 #include <SDL2/SDL.h>
-#include "../Core/Object.h"
 //渲染系统类，将所有渲染函数封装
 
+class Object;
 
 class RenderSystem {
 private:

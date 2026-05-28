@@ -2,52 +2,19 @@
 #include "System/InputSystem.h"
 #include "System/RenderSystem.h"
 #include "System/PhysicalSystem.h"
+#include "System/SceneSystem.h"
+#include "GameScene.h"
 #include "iostream"
 #include <SDL2/SDL.h>
 using namespace std;
-
-void resolveCollision(Object& a, Object& b){
-    //获取中心点
-    float aCenterX = (a.position.x + a.size.x)/2;
-    float aCenterY = (a.position.y + a.size.y)/2;
-    float bCenterX = (b.position.x + b.size.x)/2;
-    float bCenterY = (b.position.y + b.size.y)/2;
-
-    //计算中心点的距离
-    float dx = bCenterX - aCenterX;
-    float dy = bCenterY - aCenterY;
-
-    //计算overlap的长度
-    float overlapX = ((a.size.x / 2) + (b.size.x / 2)) - abs(dx);
-    float overlapY = ((a.size.y / 2) + (b.size.y / 2)) - abs(dy);
-
-    //overlap比较少的方向代表其是最近进入的方向或者说最应该向外推的方向
-    if (overlapX < overlapY) {
-        if (dx > 0) a.position.x -= overlapX;
-        else a.position.x += overlapX;
-        a.velocity.x = 0;
-    }
-    else {
-        if (dy > 0) {
-            //特殊情况，因为从上向下掉，会到达地面，而在地面上的时候，重力加速度不会对物体造成影响
-            a.position.y -= overlapY;
-            a.onGround = true;
-        }
-        else a.position.y += overlapY;
-        a.velocity.y = 0;
-    }
-}
+// include的基本规则：能够少include的就少include，按照以下的优先级
+// 如果private是一个类，需要include这个类的头文件
+// 继承类需要include，因为其需要知道大小和逻辑
+// 头文件不需要include，只需要让编译器知道有这个类就行
+// 源文件需要include，因为其需要知道类的大小和实现的具体逻辑
+// 如果当前文件只有引用和指针，一样不需要include，因为引用和指针本质上就是地址，其大小固定的
 
 int main(){
-    //游戏测试类初始化
-    Object testObj;
-    testObj.position = { 0, 300 };
-    testObj.size = { 80, 40 };
-    Object ground;
-    ground.position = { 0,400 };
-    ground.size = { 800, 200 };
-
-
     //输入系统类初始化
     InputSystem input;
     
@@ -64,6 +31,9 @@ int main(){
     //物理系统类初始化
     PhysicalSystem physicalSystem;
 
+    //游戏场景类初始化
+    GameScene GameScene;
+
     //游戏主循环的配置
     bool running = true;
     Uint32 lastTime = SDL_GetTicks();//SDL的真实时间函数
@@ -77,22 +47,14 @@ int main(){
 
         //输入
         input.update();
-        if (input.isKeyHeld(SDL_SCANCODE_RIGHT)) testObj.velocity.x = 100;
-        if (input.isKeyHeld(SDL_SCANCODE_LEFT))  testObj.velocity.x = -100;
-        if (input.isKeyHeld(SDL_SCANCODE_UP))  testObj.velocity.y = -100;
         if (input.quitRequested()) running = false;
 
-        //更新数据
-        physicalSystem.moveObj(testObj, dt);
-        physicalSystem.applyGravity(testObj, dt);
-        if (physicalSystem.checkCollision(testObj, ground)) 
-            resolveCollision(testObj, ground);
-        
+        //更新当前场景数据
+        GameScene.update(dt, input, physicalSystem);
 
         //渲染
         render.clear({ 255, 255, 255, 255 });
-        render.draw(testObj, { 0, 0, 0, 255 });
-        render.draw(ground, { 0, 0, 0, 255 });
+        GameScene.render(render);
         render.present();
 
     }

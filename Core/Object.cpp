@@ -2,8 +2,8 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 
-Object::Object() {
-	size = { 0, 0 };
-	position = { 0, 0 };
-	velocity = { 0, 0 };
+Object::Object(Vector2 s, Vector2 p, Vector2 v) {
+	size = s;
+	position = p;
+	velocity = v;
 }

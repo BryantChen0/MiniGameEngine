@@ -7,10 +7,7 @@ void PhysicalSystem::moveObj(Object& obj, float dt) {
 
 void PhysicalSystem::applyGravity(Object& obj, float dt) {
 	//按照坐标轴来说，向下是加
-	//如果在地面上，不需要应用重力
-	if (!obj.onGround) {
-		obj.velocity.y += gravity * dt;
-	}
+	obj.velocity.y += gravity * dt;
 }
 
 bool PhysicalSystem::checkCollision(const Object& a, const Object& b) {

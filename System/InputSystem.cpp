@@ -1,6 +1,7 @@
+#include "InputSystem.h"
 #include <SDL2/SDL.h>
 #include<cstring>
-#include "InputSystem.h"
+
 
 void InputSystem::update() {//更新输入队列;
 	//内存复制，将这一帧的输入内容储存到上一帧

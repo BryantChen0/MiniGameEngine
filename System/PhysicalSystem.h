@@ -1,6 +1,6 @@
 //物理系统类，负责生成一系列物理逻辑函数
+#pragma once
 #include "../Core/object.h"
-#include "../Math/Vector2.h"
 
 class PhysicalSystem {
 private:

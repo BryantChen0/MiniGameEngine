@@ -6,11 +6,10 @@
 class Object {
 private:
 public:
-    Vector2 position;
-    Vector2 velocity;
-    Vector2 size;
-    bool onGround = false;
+    Vector2 position = {0,0};
+    Vector2 velocity = { 0,0 };
+    Vector2 size = { 0,0 };
 
-    Object();
+    Object(Vector2 s, Vector2 p, Vector2 v);
 };
 
