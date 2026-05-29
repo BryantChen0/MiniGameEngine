@@ -8,7 +8,7 @@ using namespace std;
 
 GameScene::GameScene()
     : testObj({ 80, 40 }, { 0, 300 }, { 0, 0 })
-    , ground({ 800, 200 }, { 0, 400 }, { 0, 0 })
+    , ground({ 800, 200 }, { 0, 500 }, { 0, 0 })
 {}
 
 void GameScene::update(float dt, InputSystem& input, PhysicalSystem& physicalSystem){
@@ -19,11 +19,15 @@ void GameScene::update(float dt, InputSystem& input, PhysicalSystem& physicalSys
     physicalSystem.moveObj(testObj, dt);
     physicalSystem.applyGravity(testObj, dt);
     if (physicalSystem.checkCollision(testObj, ground)) {
-        cout << "collision !\n";
+        gameOver = true;
     }
 }
 
 void GameScene::render(RenderSystem& render){
     render.draw(testObj, { 0,0,0,255 });
     render.draw(ground, { 0,0,0,255 });
+}
+
+bool GameScene::isDead() {
+    return gameOver;
 }

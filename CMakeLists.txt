@@ -13,7 +13,7 @@ add_executable(MiniGameEngine
         System/InputSystem.cpp
         System/RenderSystem.cpp
         System/PhysicalSystem.cpp
-        System/SceneSystem.cpp "GameScene.h" "GameScene.cpp")
+        System/SceneSystem.cpp "GameScene.h" "GameScene.cpp" "GameOverScene.cpp")
 
 target_compile_definitions(MiniGameEngine PRIVATE SDL_MAIN_HANDLED)
 

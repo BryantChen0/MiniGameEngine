@@ -6,15 +6,10 @@ class InputSystem;
 class PhysicalSystem;
 class RenderSystem;
 
-class GameScene : public IScene {
-private:
-    Object testObj;
-    Object ground;
-    bool gameOver = false;
+class GameOverScene : public IScene {
 public:
-    GameScene();
+    GameOverScene();
     void update(float dt, InputSystem& input, PhysicalSystem& physicalSystem) override;
     void render(RenderSystem& render) override;
-    bool isDead();
-    ~GameScene() override = default;
+    ~GameOverScene() override = default;
 };

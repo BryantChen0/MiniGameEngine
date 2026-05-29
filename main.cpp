@@ -4,6 +4,7 @@
 #include "System/PhysicalSystem.h"
 #include "System/SceneSystem.h"
 #include "GameScene.h"
+#include "GameOverScene.h"
 #include "iostream"
 #include <SDL2/SDL.h>
 using namespace std;
@@ -32,7 +33,10 @@ int main(){
     PhysicalSystem physicalSystem;
 
     //游戏场景类初始化
-    GameScene GameScene;
+    GameScene gameScene;
+    GameOverScene gameOverScene;
+    SceneManager sceneManager;
+    sceneManager.switchScene(&gameScene);
 
     //游戏主循环的配置
     bool running = true;
@@ -50,11 +54,17 @@ int main(){
         if (input.quitRequested()) running = false;
 
         //更新当前场景数据
-        GameScene.update(dt, input, physicalSystem);
+        sceneManager.update(dt, input, physicalSystem);
+        if (gameScene.isDead())
+        {
+            sceneManager.switchScene(
+                &gameOverScene
+            );
+        }
 
         //渲染
         render.clear({ 255, 255, 255, 255 });
-        GameScene.render(render);
+        sceneManager.render(render);
         render.present();
 
     }
