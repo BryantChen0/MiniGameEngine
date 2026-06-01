@@ -82,9 +82,6 @@ Input → Update → Render
 
     * 位置（Position）
     * 速度（Velocity）
-* 提供统一接口：
-
-    * `update()`
 
 ### 物理系统（Physics System）
 
@@ -99,12 +96,16 @@ Input → Update → Render
 * 使用速度更新位置
 * 检测实体之间的碰撞
 
+提供实体物理方面的数据更新
+
 ### 场景系统（Scene System）
 
 功能：
 
 * 管理当前游戏状态
 * 支持场景切换（Game / GameOver）
+
+提供创建场景和其中的实体的状态和渲染
 
 ### 资源管理系统（Resource Manager）
 

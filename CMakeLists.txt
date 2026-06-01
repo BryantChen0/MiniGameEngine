@@ -4,6 +4,7 @@ project(MiniGameEngine)
 set(CMAKE_CXX_STANDARD 17)
 
 find_package(SDL2 CONFIG REQUIRED)
+find_package(SDL2_image REQUIRED)
 
 add_executable(MiniGameEngine
         main.cpp
@@ -20,4 +21,5 @@ target_compile_definitions(MiniGameEngine PRIVATE SDL_MAIN_HANDLED)
 target_link_libraries(MiniGameEngine PRIVATE
         SDL2::SDL2
         SDL2::SDL2main
+        SDL2_image::SDL2_image
         )
