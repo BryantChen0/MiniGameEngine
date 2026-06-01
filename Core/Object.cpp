@@ -1,4 +1,4 @@
-#include "Object.h"
+﻿#include "Object.h"
 #include <iostream>
 #include <SDL2/SDL.h>
 

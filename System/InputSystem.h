@@ -1,13 +1,13 @@
-#pragma once
+ï»¿#pragma once
 #include <SDL2/SDL.h>
-//ÊäÈëÏµÍ³Àà£¬½«ËùÓĞ¹ØÓÚSDLµÄ¼üÅÌÊäÈë·â×°ÆğÀ´
-//Ö»±©Â¶½Ó¿Ú¸øÆäËû³ÌĞòµ÷ÓÃ
+//è¾“å…¥ç³»ç»Ÿç±»ï¼Œå°†æ‰€æœ‰å…³äºSDLçš„é”®ç›˜è¾“å…¥å°è£…èµ·æ¥
+//åªæš´éœ²æ¥å£ç»™å…¶ä»–ç¨‹åºè°ƒç”¨
 
 class InputSystem {
 private:
-	//»ñÈ¡Ò»¸öÖ¸Ïò¼üÅÌ×´Ì¬Êı×éµÄÖ¸Õë£¬ÓÉÓÚÊı×éÖ»ÓĞ0ºÍ1£¬ËùÒÔÓÃUint8Õâ¸ö¶ş½øÖÆµÄÀàĞÍÖ¸ÕëÀ´Ö¸Ïò
-	const Uint8* currentKeys = nullptr;//±¾Ö¡
-	const Uint8* prevKeys[SDL_NUM_SCANCODES] = {};//ÉÏÒ»Ö¡
+	//è·å–ä¸€ä¸ªæŒ‡å‘é”®ç›˜çŠ¶æ€æ•°ç»„çš„æŒ‡é’ˆï¼Œç”±äºæ•°ç»„åªæœ‰0å’Œ1ï¼Œæ‰€ä»¥ç”¨Uint8è¿™ä¸ªäºŒè¿›åˆ¶çš„ç±»å‹æŒ‡é’ˆæ¥æŒ‡å‘
+	const Uint8* currentKeys = nullptr;//æœ¬å¸§
+	const Uint8* prevKeys[SDL_NUM_SCANCODES] = {};//ä¸Šä¸€å¸§
 	bool quit = false;
 
 public:

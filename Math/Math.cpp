@@ -1,2 +1,2 @@
-#include "Math.h"
+﻿#include "Math.h"
 #include <cmath>

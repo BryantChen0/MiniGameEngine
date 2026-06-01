@@ -1,21 +1,21 @@
-#include "RenderSystem.h"
+ï»¿#include "RenderSystem.h"
 #include "../Core/Object.h"
 
 RenderSystem::RenderSystem(SDL_Window* window) {
-    renderer = SDL_CreateRenderer(//´´½¨äÖÈ¾Æ÷
+    renderer = SDL_CreateRenderer(//åˆ›å»ºæ¸²æŸ“å™¨
         window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
     );
 }
 
 void RenderSystem::clear(SDL_Color color) {
-    //´°¿ÚäÖÈ¾
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);//¸Ä±ääÖÈ¾Æ÷ÑÕÉ«Îª¶ÔÓ¦ÑÕÉ«
-    SDL_RenderClear(renderer);//Ê¹ÓÃäÖÈ¾Æ÷×÷ÎªÏğÆ¤²Á£¬½«Õû¸ö»º´æÇø²Á³É¶ÔÓ¦ÑÕÉ«
+    //çª—å£æ¸²æŸ“
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);//æ”¹å˜æ¸²æŸ“å™¨é¢œè‰²ä¸ºå¯¹åº”é¢œè‰²
+    SDL_RenderClear(renderer);//ä½¿ç”¨æ¸²æŸ“å™¨ä½œä¸ºæ©¡çš®æ“¦ï¼Œå°†æ•´ä¸ªç¼“å­˜åŒºæ“¦æˆå¯¹åº”é¢œè‰²
 }
 
 void RenderSystem::draw(Object obj, SDL_Color color) {
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-    SDL_Rect rect = {//³¤·½ĞÎµÄäÖÈ¾ÊÇ´Ó×óÉÏ½ÇµÄ×ø±ê¿ªÊ¼ÒÔµÚÈı¸ö²ÎÊıÎª³¤¶È£¬µÚËÄ¸ö²ÎÊıÎª¿í¶È½øĞĞ»æÖÆ
+    SDL_Rect rect = {//é•¿æ–¹å½¢çš„æ¸²æŸ“æ˜¯ä»å·¦ä¸Šè§’çš„åæ ‡å¼€å§‹ä»¥ç¬¬ä¸‰ä¸ªå‚æ•°ä¸ºé•¿åº¦ï¼Œç¬¬å››ä¸ªå‚æ•°ä¸ºå®½åº¦è¿›è¡Œç»˜åˆ¶
     (int)obj.position.x,
     (int)obj.position.y,
     (int)obj.size.x,

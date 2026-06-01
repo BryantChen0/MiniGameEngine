@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../Math/Vector2.h"
 #include <SDL2/SDL.h>
 //数据类，用于记录当前游戏对象的数据

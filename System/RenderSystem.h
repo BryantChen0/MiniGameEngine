@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 #include <SDL2/SDL.h>
-//äÖÈ¾ÏµÍ³Àà£¬½«ËùÓĞäÖÈ¾º¯Êı·â×°
+//æ¸²æŸ“ç³»ç»Ÿç±»ï¼Œå°†æ‰€æœ‰æ¸²æŸ“å‡½æ•°å°è£…
 
 class Object;
 
@@ -9,10 +9,10 @@ private:
 	SDL_Renderer* renderer = nullptr;
 
 public:
-	RenderSystem(SDL_Window* window);//³õÊ¼»¯ÏµÍ³äÖÈ¾Æ÷
-	void clear(SDL_Color color);//Ã¿Ò»Ö¡Çå³ı»­²¼£¬ÖØĞÂ»­±³¾°
+	RenderSystem(SDL_Window* window);//åˆå§‹åŒ–ç³»ç»Ÿæ¸²æŸ“å™¨
+	void clear(SDL_Color color);//æ¯ä¸€å¸§æ¸…é™¤ç”»å¸ƒï¼Œé‡æ–°ç”»èƒŒæ™¯
 	void draw(Object obj, SDL_Color color);
-	void present();//Êä³ö»­²¼µÄ½á¹û
-	void shutDown();//¹Ø±ÕäÖÈ¾
-	SDL_Renderer* getRenderer();//»ñÈ¡äÖÈ¾Æ÷
+	void present();//è¾“å‡ºç”»å¸ƒçš„ç»“æœ
+	void shutDown();//å…³é—­æ¸²æŸ“
+	SDL_Renderer* getRenderer();//è·å–æ¸²æŸ“å™¨
 };

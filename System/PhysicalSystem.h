@@ -1,4 +1,4 @@
-//ÎïÀíÏµÍ³Àà£¬¸ºÔğÉú³ÉÒ»ÏµÁĞÎïÀíÂß¼­º¯Êı
+ï»¿//ç‰©ç†ç³»ç»Ÿç±»ï¼Œè´Ÿè´£ç”Ÿæˆä¸€ç³»åˆ—ç‰©ç†é€»è¾‘å‡½æ•°
 #pragma once
 #include "../Core/object.h"
 
@@ -7,7 +7,7 @@ private:
 	float gravity = 98.0f;
 	
 public:
-	void moveObj(Object& obj, float dt);//Î»ÖÃ±ä»¯ËãÊÇÒ»ÖÖÎïÀí±ä»¯£¬ËùÒÔ½«Æä·ÅÔÚÕâÀï
-	void applyGravity(Object& obj, float dt);//Ìí¼ÓÖØÁ¦µ¼ÖÂµÄÎ»ÖÃ±ä»¯
-	bool checkCollision(const Object& a, const Object& b);//ÅĞ¶ÏÊÇ·ñÅö×²
+	void moveObj(Object& obj, float dt);//ä½ç½®å˜åŒ–ç®—æ˜¯ä¸€ç§ç‰©ç†å˜åŒ–ï¼Œæ‰€ä»¥å°†å…¶æ”¾åœ¨è¿™é‡Œ
+	void applyGravity(Object& obj, float dt);//æ·»åŠ é‡åŠ›å¯¼è‡´çš„ä½ç½®å˜åŒ–
+	bool checkCollision(const Object& a, const Object& b);//åˆ¤æ–­æ˜¯å¦ç¢°æ’
 };

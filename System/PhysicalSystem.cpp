@@ -1,4 +1,4 @@
-#include "PhysicalSystem.h"
+ï»¿#include "PhysicalSystem.h"
 #include "../Math/Vector2.h"
 
 void PhysicalSystem::moveObj(Object& obj, float dt) {
@@ -6,17 +6,17 @@ void PhysicalSystem::moveObj(Object& obj, float dt) {
 }
 
 void PhysicalSystem::applyGravity(Object& obj, float dt) {
-	//°´ÕÕ×ø±êÖáÀ´Ëµ£¬ÏòÏÂÊÇ¼Ó
+	//æŒ‰ç…§åæ ‡è½´æ¥è¯´ï¼Œå‘ä¸‹æ˜¯åŠ 
 	obj.velocity.y += gravity * dt;
 }
 
 bool PhysicalSystem::checkCollision(const Object& a, const Object& b) {
-	//ÒòÎªÁ½¸öÎïÌåÅö×²ÓÐ°ËÖÖÇé¿ö£¬µ«ÊÇÃ»Åö×²Ö»ÓÐËÄÖÖÇé¿ö£º
-	//ÎïÌåaµÄ×îÓÒ×ø±êÐ¡ÓÚbµÄ×î×ó
-	//ÎïÌåaµÄ×î×ó×ø±ê´óÓÚbµÄ×îÓÒ
-	//ÎïÌåaµÄ×îÏÂ×ø±êÐ¡ÓÚbµÄ×îÉÏ
-	//ÎïÌåaµÄ×îÉÏ×ø±ê´óÓÚbµÄ×îÏÂ
-	//ËùÒÔÖ»ÒªÂú×ãÒÔÉÏÌõ¼þ£¬¾ÍÎ´Åö×²£¬·´Ö®ÔòÅö×²
+	//å› ä¸ºä¸¤ä¸ªç‰©ä½“ç¢°æ’žæœ‰å…«ç§æƒ…å†µï¼Œä½†æ˜¯æ²¡ç¢°æ’žåªæœ‰å››ç§æƒ…å†µï¼š
+	//ç‰©ä½“açš„æœ€å³åæ ‡å°äºŽbçš„æœ€å·¦
+	//ç‰©ä½“açš„æœ€å·¦åæ ‡å¤§äºŽbçš„æœ€å³
+	//ç‰©ä½“açš„æœ€ä¸‹åæ ‡å°äºŽbçš„æœ€ä¸Š
+	//ç‰©ä½“açš„æœ€ä¸Šåæ ‡å¤§äºŽbçš„æœ€ä¸‹
+	//æ‰€ä»¥åªè¦æ»¡è¶³ä»¥ä¸Šæ¡ä»¶ï¼Œå°±æœªç¢°æ’žï¼Œåä¹‹åˆ™ç¢°æ’ž
 	if (a.position.x + a.size.x < b.position.x) return false;
 	if (a.position.x > b.position.x + b.size.x) return false;
 	if (a.position.y + a.size.y < b.position.y) return false;

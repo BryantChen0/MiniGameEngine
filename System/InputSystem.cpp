@@ -1,10 +1,10 @@
-#include "InputSystem.h"
+ï»¿#include "InputSystem.h"
 #include <SDL2/SDL.h>
 #include<cstring>
 
 
-void InputSystem::update() {//¸üĞÂÊäÈë¶ÓÁĞ;
-	//ÄÚ´æ¸´ÖÆ£¬½«ÕâÒ»Ö¡µÄÊäÈëÄÚÈİ´¢´æµ½ÉÏÒ»Ö¡
+void InputSystem::update() {//æ›´æ–°è¾“å…¥é˜Ÿåˆ—;
+	//å†…å­˜å¤åˆ¶ï¼Œå°†è¿™ä¸€å¸§çš„è¾“å…¥å†…å®¹å‚¨å­˜åˆ°ä¸Šä¸€å¸§
     if (currentKeys != nullptr) {
         memcpy(prevKeys, currentKeys, SDL_NUM_SCANCODES);
     }
