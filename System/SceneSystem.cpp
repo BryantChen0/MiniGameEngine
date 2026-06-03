@@ -8,12 +8,10 @@ void SceneManager::switchScene(IScene* newScene) {
 	currentScene = newScene;
 }
 
-void SceneManager::update(float dt,
-	InputSystem& input,
-	PhysicalSystem& physics) {
-	currentScene->update(dt,input,physics);
+void SceneManager::update(float dt) {
+	currentScene->update(dt);
 }
 
-void SceneManager::render(RenderSystem& render) {
-	currentScene->render(render);
+void SceneManager::render() {
+	currentScene->render();
 }

@@ -13,15 +13,17 @@ void RenderSystem::clear(SDL_Color color) {
     SDL_RenderClear(renderer);//使用渲染器作为橡皮擦，将整个缓存区擦成对应颜色
 }
 
-void RenderSystem::draw(Object obj, SDL_Color color) {
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-    SDL_Rect rect = {//长方形的渲染是从左上角的坐标开始以第三个参数为长度，第四个参数为宽度进行绘制
-    (int)obj.position.x,
-    (int)obj.position.y,
-    (int)obj.size.x,
-    (int)obj.size.y
-    };
-    SDL_RenderFillRect(renderer, &rect);
+void RenderSystem::draw(Object& obj, SDL_Color color) {
+    SDL_Rect dst = { (int)obj.position.x, (int)obj.position.y, (int)obj.size.x, (int)obj.size.y };
+    //前两个参数是矩形左上角的坐标，后两个参数是矩形的长和宽，最后出来的结果是一个矩阵
+
+    int r = SDL_RenderCopy(renderer, obj.texture, nullptr, &dst);
+
+    if (r != 0)
+    {
+        SDL_Log("RenderCopy ERROR: %s", SDL_GetError());
+    }
+
 }
 
 void RenderSystem::present() {

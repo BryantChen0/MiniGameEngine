@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+﻿cmake_minimum_required(VERSION 3.20)
 project(MiniGameEngine)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -14,7 +14,10 @@ add_executable(MiniGameEngine
         System/InputSystem.cpp
         System/RenderSystem.cpp
         System/PhysicalSystem.cpp
-        System/SceneSystem.cpp "GameScene.h" "GameScene.cpp" "GameOverScene.cpp")
+        System/SceneSystem.cpp 
+        "GameScene.cpp" 
+        "GameOverScene.cpp" 
+        "System/ImageSystem.cpp")
 
 target_compile_definitions(MiniGameEngine PRIVATE SDL_MAIN_HANDLED)
 

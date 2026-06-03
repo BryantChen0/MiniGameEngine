@@ -4,10 +4,9 @@
 #include "System/RenderSystem.h"
 #include "Core/Object.h"
 #include "iostream"
-using namespace std;
 
 GameOverScene::GameOverScene() {};
 
-void GameOverScene::update(float dt, InputSystem& input, PhysicalSystem& physicalSystem) {}
+void GameOverScene::update(float dt) {}
 
-void GameOverScene::render(RenderSystem& render) {}
+void GameOverScene::render() {}

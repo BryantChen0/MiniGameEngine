@@ -2,10 +2,6 @@
 #include <SDL2/SDL.h>
 //场景管理类和场景接口类
 
-class InputSystem;
-class PhysicalSystem;
-class RenderSystem;
-
 class IScene {
 	//使用virtual的原因：
 	//如果不加 virtual：子类可以重写，但通过父类指针调用时会被忽略
@@ -15,10 +11,8 @@ class IScene {
 	//所以选择添加virtual保证其调用的是子类的方法而不是父类的方法
 	//定义虚函数的原因是，如果子类没有定义，就在编译时报错，防止子类未定义而被调用
 public:
-	virtual void update(float dt,
-		InputSystem& input,
-		PhysicalSystem& physics) = 0;//虚函数
-	virtual void render(RenderSystem& render) = 0;
+	virtual void update(float dt) = 0;//虚函数
+	virtual void render() = 0;
 	virtual ~IScene() = default;
 };
 
@@ -30,8 +24,6 @@ private:
 
 public:
 	void switchScene(IScene* newScene);
-	void update(float dt,
-		InputSystem& input,
-		PhysicalSystem& physics);
-	void render(RenderSystem& render);
+	void update(float dt);
+	void render();
 };
