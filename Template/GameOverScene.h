@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "System/SceneSystem.h"
-#include "Core/Object.h"
+#include "../System/SceneSystem.h"
+#include "../Core/Object.h"
 
 class InputSystem;
 class PhysicalSystem;

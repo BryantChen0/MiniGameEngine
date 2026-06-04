@@ -1,35 +1,32 @@
 ﻿#include "GameScene.h"
-#include "System/PhysicalSystem.h"
-#include "System/InputSystem.h"
-#include "System/RenderSystem.h"
-#include "System/ImageSystem.h"
-#include "Core/Object.h"
+#include "Player.h"
+#include "../System/PhysicalSystem.h"
+#include "../System/InputSystem.h"
+#include "../System/RenderSystem.h"
+#include "../System/ImageSystem.h"
+#include "../Core/Object.h"
 #include "iostream"
 
 GameScene::GameScene(InputSystem& inputSystem, PhysicalSystem& physicalSystem, RenderSystem& renderSystem, ImageSystem& imageSystem)
-    : testObj({ 80, 40 }, { 0, 0 }, { 0, 0 }),
+    : player(inputSystem, physicalSystem, { 80, 40 }, { 0, 0 }, { 0, 0 }),
     ground({ 800, 200 }, { 0, 500 }, { 0, 0 }),
     input(inputSystem),
     physical(physicalSystem),
     renderer(renderSystem),
     image(imageSystem)
+    //构造函数初始化列表（Constructor Initialization List）
 {
 }
 
 void GameScene::update(float dt){
-    if (input.isKeyHeld(SDL_SCANCODE_RIGHT)) testObj.velocity.x = 100;
-    if (input.isKeyHeld(SDL_SCANCODE_LEFT))  testObj.velocity.x = -100;
-    if (input.isKeyHeld(SDL_SCANCODE_UP))  testObj.velocity.y = -100;
-
-    physical.moveObj(testObj, dt);
-    physical.applyGravity(testObj, dt);
-    if (physical.checkCollision(testObj, ground)) {
+    player.update(dt);
+    if (physical.checkCollision(player, ground)) {
         gameOver = true;
     }
 }
 
 void GameScene::render(){
-    renderer.draw(testObj, { 0,0,0,255 });
+    renderer.draw(player, { 0,0,0,255 });
     renderer.draw(ground, { 0,0,0,255 });
 }
 
@@ -45,7 +42,7 @@ void GameScene::loadImage()
         return;
     }
 
-    testObj.texture =
+    player.texture =
         image.GetTexture("testObj");
 
     ground.texture =

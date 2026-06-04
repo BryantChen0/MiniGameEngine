@@ -1,6 +1,7 @@
 ﻿#pragma once
-#include "System/SceneSystem.h"
-#include "Core/Object.h"
+#include "../System/SceneSystem.h"
+#include "../Core/Object.h"
+#include "Player.h"
 
 class InputSystem;
 class PhysicalSystem;
@@ -9,7 +10,7 @@ class ImageSystem;
 
 class GameScene : public IScene {
 private:
-    Object testObj;
+    Player player;
     Object ground;
     bool gameOver = false;
     InputSystem& input;

@@ -7,7 +7,7 @@ find_package(SDL2 CONFIG REQUIRED)
 find_package(SDL2_image REQUIRED)
 
 add_executable(MiniGameEngine
-        main.cpp
+        "Template/main.cpp"
         Math/Math.cpp
         Math/Vector2.h
         Core/Object.cpp
@@ -15,9 +15,11 @@ add_executable(MiniGameEngine
         System/RenderSystem.cpp
         System/PhysicalSystem.cpp
         System/SceneSystem.cpp 
-        "GameScene.cpp" 
-        "GameOverScene.cpp" 
-        "System/ImageSystem.cpp")
+        "Template/GameScene.cpp" 
+        "Template/GameOverScene.cpp" 
+        "System/ImageSystem.cpp" 
+        "Core/Entity.cpp" 
+        "Template/Player.cpp")
 
 target_compile_definitions(MiniGameEngine PRIVATE SDL_MAIN_HANDLED)
 
