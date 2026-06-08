@@ -19,7 +19,8 @@ add_executable(MiniGameEngine
         "Template/GameOverScene.cpp" 
         "System/ImageSystem.cpp" 
         "Core/Entity.cpp" 
-        "Template/Player.cpp")
+        "Template/Player.cpp" 
+        "Template/Pipe.cpp")
 
 target_compile_definitions(MiniGameEngine PRIVATE SDL_MAIN_HANDLED)
 

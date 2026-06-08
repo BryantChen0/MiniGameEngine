@@ -4,7 +4,7 @@
 
 class PhysicalSystem {
 private:
-	float gravity = 98.0f;
+	float gravity = 150.0f;
 	
 public:
 	void moveObj(Object& obj, float dt);//位置变化算是一种物理变化，所以将其放在这里

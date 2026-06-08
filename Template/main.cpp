@@ -57,7 +57,7 @@ int main(){
     ImageSystem imageSystem;
 
     //游戏场景类初始化
-    GameScene gameScene(inputSystem, physicalSystem, renderSystem, imageSystem);
+    GameScene gameScene(inputSystem, physicalSystem, renderSystem, imageSystem, { 800, 600 });
     gameScene.loadImage();
     GameOverScene gameOverScene;
     SceneManager sceneManager;
