@@ -11,6 +11,5 @@
 class Entity : public Object {
 public:
 	Entity(Vector2 s, Vector2 p, Vector2 v);
-	Entity();
 	virtual void update(float dt) = 0;
 };

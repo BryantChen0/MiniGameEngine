@@ -22,7 +22,7 @@ GameScene::GameScene(InputSystem& inputSystem, PhysicalSystem& physicalSystem, R
     //这个和push的差别在于，其直接构造对象，但是push需要临时对象进行拷贝或者移入其中
     pipes.emplace_back(
         screenHeight / 2,
-        100.0f,
+        200.0f,
         screenSize,
         Vector2{ 160, screenHeight },
         Vector2{ screenWidth, 0 },
@@ -36,7 +36,7 @@ void GameScene::spawnPipe() {
 
     pipes.emplace_back(
         gapY,
-        100.0f,
+        200.0f,
         Vector2{ screenWidth, screenHeight },
         Vector2{ 160, screenHeight },
         Vector2{ screenWidth, 0 },
@@ -67,8 +67,7 @@ void GameScene::update(float dt){
     //碰撞检测
     for (auto& pipe : pipes)
     {
-        if (physical.checkCollision(player, pipe.topPipe)
-            || physical.checkCollision(player, pipe.bottomPipe))
+        if (physical.checkCollision(player, pipe))
         {
             gameOver = true;
         }
@@ -83,11 +82,11 @@ void GameScene::update(float dt){
 }
 
 void GameScene::render(){
-    renderer.draw(player, { 0,0,0,255 });
+    renderer.draw(player);
     for (auto& pipe : pipes)
     {
-        renderer.draw(pipe.topPipe, { 0,0,0,255 });
-        renderer.draw(pipe.bottomPipe, { 0,0,0,255 });
+        renderer.draw(pipe.topPipe);
+        renderer.draw(pipe.bottomPipe);
     }
 
 }

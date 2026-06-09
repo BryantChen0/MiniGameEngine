@@ -13,6 +13,7 @@ class ImageSystem;
 class GameScene : public IScene {
 private:
     Player player;
+    //因为大部分游戏都需要多个同类型的对象，类似于子弹，敌人之类的东西，所以接下来在引擎层面需要实现多个同类对象的管理器
     std::vector<Pipe> pipes;
     float screenWidth;
     float screenHeight;

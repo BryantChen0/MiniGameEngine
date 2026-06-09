@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 
 Object::Object(Vector2 s, Vector2 p, Vector2 v) {
-	size = s;
+	rendersize = s;
 	position = p;
 	velocity = v;
 }

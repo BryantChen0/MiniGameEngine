@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "Math.h"
-#include <iostream>
 //坐标数据结构
 //这里使用struct，而不是class的原因是vector2是一个数学对象，也就是说
 //如果它的数据被外部直接修改，也不会影响这个对象和它内部函数的逻辑
