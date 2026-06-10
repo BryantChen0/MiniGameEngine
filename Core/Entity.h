@@ -9,7 +9,14 @@
 //那么如果逻辑和数据放在一起，就会产生Object类变成一个上帝类，同时所有的实例对象变成必须更新了
 
 class Entity : public Object {
+protected:
+	bool alive = true;
+
 public:
 	Entity(Vector2 s, Vector2 p, Vector2 v);
 	virtual void update(float dt) = 0;
+	//使用alive的原因是，大部分情况下，只要游戏实例结束生命周期，
+	// 直接清理就行，所以我们只要关注它是否存活就行
+	bool isAlive() const { return alive; }
+	void destroy() { alive = false; }
 };

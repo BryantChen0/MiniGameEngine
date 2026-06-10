@@ -5,6 +5,7 @@
 #include "../System/InputSystem.h"
 #include "../System/RenderSystem.h"
 #include "../System/ImageSystem.h"
+
 #include "../Core/Object.h"
 #include "iostream"
 
@@ -18,29 +19,21 @@ GameScene::GameScene(InputSystem& inputSystem, PhysicalSystem& physicalSystem, R
 {
     screenWidth = screenSize.x;
     screenHeight = screenSize.y;
-
-    //这个和push的差别在于，其直接构造对象，但是push需要临时对象进行拷贝或者移入其中
-    pipes.emplace_back(
-        screenHeight / 2,
-        200.0f,
-        screenSize,
-        Vector2{ 160, screenHeight },
-        Vector2{ screenWidth, 0 },
-        Vector2{ -50, 0 }
-    );
 }
 
 void GameScene::spawnPipe() {
     //rand() % range + min这个随机数公式的范围是[min, min + range - 1]
     float gapY = rand() % ((int)screenHeight - 200) + 100;
 
-    pipes.emplace_back(
+    pipes.spawn(
         gapY,
         200.0f,
         Vector2{ screenWidth, screenHeight },
         Vector2{ 160, screenHeight },
         Vector2{ screenWidth, 0 },
-        Vector2{ -50, 0 }
+        Vector2{ -50, 0 },
+        image.GetTexture("topPipe"),
+        image.GetTexture("bottomPipe")
     );
 }
 
@@ -58,14 +51,15 @@ void GameScene::update(float dt){
     }
 
     //移动管道
-    for (auto& pipe : pipes)
+    for (auto& pipe : pipes.getObjects())
     {
         physical.moveObj(pipe, dt);
-        pipe.update(dt);
     }
 
+    pipes.update(dt);
+
     //碰撞检测
-    for (auto& pipe : pipes)
+    for (auto& pipe : pipes.getObjects())
     {
         if (physical.checkCollision(player, pipe))
         {
@@ -74,16 +68,12 @@ void GameScene::update(float dt){
     }
 
     //清除离开屏幕的管道
-    for (int i = pipes.size() - 1; i >= 0; i--) {
-        if (pipes[i].isOutOfScreen()) {
-            pipes.erase(pipes.begin() + i);
-        }
-    }
+    pipes.removeDead();
 }
 
 void GameScene::render(){
     renderer.draw(player);
-    for (auto& pipe : pipes)
+    for (auto& pipe : pipes.getObjects())
     {
         renderer.draw(pipe.topPipe);
         renderer.draw(pipe.bottomPipe);
@@ -105,12 +95,6 @@ void GameScene::loadImage()
 
     player.texture =
         image.GetTexture("player");
-
-    pipes.back().topPipe.texture =
-        image.GetTexture("topPipe");
-
-    pipes.back().bottomPipe.texture =
-        image.GetTexture("bottomPipe");
 }
 
 bool GameScene::isDead() {

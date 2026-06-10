@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include "../System/SceneSystem.h"
+#include "../System/ObjectManager.h"
 #include "Player.h"
 #include "Pipe.h"
 #include "../Core/Object.h"
-#include <vector>
 
 class InputSystem;
 class PhysicalSystem;
@@ -14,7 +14,7 @@ class GameScene : public IScene {
 private:
     Player player;
     //因为大部分游戏都需要多个同类型的对象，类似于子弹，敌人之类的东西，所以接下来在引擎层面需要实现多个同类对象的管理器
-    std::vector<Pipe> pipes;
+    ObjectManager<Pipe> pipes;
     float screenWidth;
     float screenHeight;
     bool gameOver = false;

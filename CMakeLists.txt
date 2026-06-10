@@ -21,7 +21,7 @@ add_executable(MiniGameEngine
         System/RenderSystem.cpp
         System/PhysicalSystem.cpp
         System/SceneSystem.cpp 
-        System/ImageSystem.cpp)
+        System/ImageSystem.cpp "System/ObjectManager.h")
 
 target_compile_definitions(MiniGameEngine PRIVATE SDL_MAIN_HANDLED)
 

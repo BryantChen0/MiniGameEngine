@@ -10,7 +10,16 @@ public:
 	//因为修改渲染逻辑太麻烦了，我要过段时间再回头处理这个
 	Object topPipe;
 	Object bottomPipe;
-	Pipe(float gapC, float gapH, Vector2 screenSize, Vector2 s, Vector2 p, Vector2 v);
+	Pipe(
+		float gapC,
+		float gapH,
+		Vector2 screenSize,
+		Vector2 s,
+		Vector2 p,
+		Vector2 v,
+		SDL_Texture* topTex,
+		SDL_Texture* bottomTex
+	);
 	void update(float dt) override;
 	void render();
 	bool isOutOfScreen();
