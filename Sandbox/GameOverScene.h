@@ -7,8 +7,10 @@ class PhysicalSystem;
 class RenderSystem;
 
 class GameOverScene : public IScene {
+private:
+    RenderSystem& renderer;
 public:
-    GameOverScene();
+    GameOverScene(RenderSystem& renderSystem);
     void update(float dt) override;
     void render() override;
     ~GameOverScene() override = default;

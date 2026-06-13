@@ -1,9 +1,11 @@
 ﻿#include "RenderSystem.h"
 #include "../Core/Object.h"
+#include "../Core/Window.h"
 
-RenderSystem::RenderSystem(SDL_Window* window) {
+
+RenderSystem::RenderSystem(Window& window) {
     renderer = SDL_CreateRenderer(//创建渲染器
-        window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
+        window.getSDLWindow(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
     );
 }
 

@@ -1,4 +1,4 @@
-﻿#include "../Core/Object.h"
+﻿#include "../Core/Window.h"
 #include "../System/InputSystem.h"
 #include "../System/RenderSystem.h"
 #include "../System/PhysicalSystem.h"
@@ -7,8 +7,7 @@
 #include "GameScene.h"
 #include "GameOverScene.h"
 #include "iostream"
-#include <SDL2/SDL.h>
-#include <SDL_image.h>
+#include <SDL_ttf.h>
 
 using namespace std;
 // include的基本规则：能够少include的就少include，按照以下的优先级
@@ -30,19 +29,15 @@ using namespace std;
 
 int main(){
     // 初始化SDL2窗口
-    // 从抽象的角度来讲，窗口不应该归于渲染系统，他应该是主程序的运行窗口，所以不放到渲染系统下
-    /*SDL2窗口初始化流程解释：
-    使用SDL2本身自带的flag来启动SDL2系统的某个部分，比如SDL_INIT_VIDEO启动的就是SDL2的视频系统
-    如果初始化成功，会返回非负二进制数，如果不成功，则会返回负数
-    当系统启动初始化完成后，创建SDL_Window*指针指向创建的窗口类*/ 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
-    {
-        SDL_Log("SDL 初始化失败: %s",
-            SDL_GetError());
-    }//初始化SDL
-    SDL_Window* window = SDL_CreateWindow(//创建窗口
-        "Mini2D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        800, 600, 0);
+    Window window(
+        "Mini2D",
+        800,
+        600
+    );
+
+    if (TTF_Init() == -1) {
+        printf("TTF_Init failed: %s\n", TTF_GetError());
+    }
 
     //输入系统类初始化
     InputSystem inputSystem;
@@ -59,15 +54,14 @@ int main(){
     //游戏场景类初始化
     GameScene gameScene(inputSystem, physicalSystem, renderSystem, imageSystem, { 800, 600 });
     gameScene.loadImage();
-    GameOverScene gameOverScene;
+    GameOverScene gameOverScene(renderSystem);
     SceneManager sceneManager;
     sceneManager.switchScene(&gameScene);
 
 
     //游戏主循环的配置
     bool running = true;
-    Uint32 lastTime = SDL_GetTicks();//SDL的真实时间函数
-    SDL_Event event;
+    Uint32 lastTime = SDL_GetTicks();//SDL的真实时间函数;
 
     //游戏主循环
     while(running){
@@ -99,8 +93,6 @@ int main(){
     //清理缓存
     imageSystem.Clear();
     renderSystem.shutDown();
-    SDL_DestroyWindow(window);
-    SDL_Quit();
 
     return 0;
 }
