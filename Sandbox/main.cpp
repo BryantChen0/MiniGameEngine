@@ -75,6 +75,7 @@ int main(){
         if (inputSystem.quitRequested()) running = false;
 
         //更新当前场景数据
+        gameOverScene.setScore(gameScene.getScore());
         sceneManager.update(dt);
         if (gameScene.isDead())
         {

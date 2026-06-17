@@ -20,6 +20,7 @@ private:
     bool gameOver = false;
     float pipeSpawnTimer = 0.0f;
     float pipeSpawnInterval = 2.0f;
+    int score = 0;
     InputSystem& input;
     PhysicalSystem& physical;
     RenderSystem& renderer;
@@ -30,6 +31,7 @@ public:
     void update(float dt) override;
     void render() override;
     void loadImage();
+    int getScore() { return score; }
     bool isDead();
     ~GameScene() override = default;
 };

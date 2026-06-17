@@ -10,6 +10,7 @@ public:
 	//因为修改渲染逻辑太麻烦了，我要过段时间再回头处理这个
 	Object topPipe;
 	Object bottomPipe;
+	bool scored = false;
 	Pipe(
 		float gapC,
 		float gapH,

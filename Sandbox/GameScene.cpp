@@ -58,14 +58,21 @@ void GameScene::update(float dt){
 
     pipes.update(dt);
 
-    //碰撞检测
     for (auto& pipe : pipes.getObjects())
     {
+        //碰撞检测
         if (physical.checkCollision(player, pipe))
         {
             gameOver = true;
         }
+        //得分机制
+        if (!pipe.scored && player.position.x > pipe.position.x)
+        {
+            score++;
+            pipe.scored = true;
+        }
     }
+
 
     //清除离开屏幕的管道
     pipes.removeDead();
