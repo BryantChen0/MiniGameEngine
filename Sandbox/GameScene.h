@@ -33,5 +33,6 @@ public:
     void loadImage();
     int getScore() { return score; }
     bool isDead();
+    void reset();
     ~GameScene() override = default;
 };

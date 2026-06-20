@@ -15,3 +15,8 @@ void SceneManager::update(float dt) {
 void SceneManager::render() {
 	currentScene->render();
 }
+
+IScene* SceneManager::getCurrentScene()
+{
+	return currentScene;
+}

@@ -54,7 +54,7 @@ int main(){
     //游戏场景类初始化
     GameScene gameScene(inputSystem, physicalSystem, renderSystem, imageSystem, { 800, 600 });
     gameScene.loadImage();
-    GameOverScene gameOverScene(renderSystem);
+    GameOverScene gameOverScene(inputSystem,renderSystem);
     SceneManager sceneManager;
     sceneManager.switchScene(&gameScene);
 
@@ -74,14 +74,23 @@ int main(){
         inputSystem.update();
         if (inputSystem.quitRequested()) running = false;
 
-        //更新当前场景数据
+        //场景切换
         gameOverScene.setScore(gameScene.getScore());
         sceneManager.update(dt);
-        if (gameScene.isDead())
-        {
-            sceneManager.switchScene(
-                &gameOverScene
-            );
+        if (gameScene.isDead()){
+            gameOverScene.reset();
+            sceneManager.switchScene(&gameOverScene);
+        }
+
+        auto* scene = sceneManager.getCurrentScene();
+        if (auto* go = dynamic_cast<GameOverScene*>(scene)){
+            sceneManager.update(dt);
+            if (go->needRestart())
+            {
+                go->reset();
+                gameScene.reset();
+                sceneManager.switchScene(&gameScene);
+            }
         }
 
         //渲染

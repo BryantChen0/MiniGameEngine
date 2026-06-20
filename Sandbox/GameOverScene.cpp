@@ -4,14 +4,23 @@
 #include "../System/RenderSystem.h"
 #include "../UI/UIText.h"
 #include "../Core/Object.h"
+#include <SDL2/SDL.h>
+#include <iostream>
 
-GameOverScene::GameOverScene(RenderSystem& renderSystem)
+GameOverScene::GameOverScene(InputSystem& inputSystem, RenderSystem& renderSystem)
     :renderer(renderSystem),
+    input(inputSystem),
     gameOverText(renderer, "Game Over", 100, 100, 300, 80),
     scoreText(renderer, "Score: 0", 100, 200, 300, 80)
 {};
 
-void GameOverScene::update(float dt) {}
+void GameOverScene::update(float dt) {
+    if(input.isKeyPressed(SDL_SCANCODE_SPACE)) {
+        std::cout << "Restart!" << std::endl;
+        restart = true;
+    }
+
+}
 
 void GameOverScene::render() {
     gameOverText.render();
@@ -24,4 +33,12 @@ void GameOverScene::setScore(int newScore) {
     scoreText.setText(
         "Score: " + std::to_string(score)
     );
+}
+
+bool GameOverScene::needRestart() const{
+    return restart;
+}
+
+void GameOverScene::reset() {
+    restart = false;
 }

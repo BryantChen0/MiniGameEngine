@@ -26,4 +26,5 @@ public:
 	void switchScene(IScene* newScene);
 	void update(float dt);
 	void render();
+	IScene* getCurrentScene();
 };

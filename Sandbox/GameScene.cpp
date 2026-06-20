@@ -108,4 +108,14 @@ bool GameScene::isDead() {
     return gameOver;
 }
 
+void GameScene::reset() {
+    gameOver = false;
+    score = 0;
 
+    player.position = { 80, 200 };
+    player.velocity = { 0, 0 };
+
+    pipes.clear();
+
+    pipeSpawnTimer = 0;
+}

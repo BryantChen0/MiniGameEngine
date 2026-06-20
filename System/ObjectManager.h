@@ -40,5 +40,17 @@ public:
     {
         return objects;
     }
+
+    //数据结构层面的清除
+    void clear()
+    {
+        objects.clear();
+    }
+
+    //语义层面的重置状态
+    void reset()
+    {
+        clear();
+    }
     
 };
