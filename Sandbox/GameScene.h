@@ -32,7 +32,12 @@ public:
     void render() override;
     void loadImage();
     int getScore() { return score; }
-    bool isDead();
+    SceneStatus getStatus() const override
+    {
+        return gameOver
+            ? SceneStatus::Finished
+            : SceneStatus::Running;
+    }
     void reset();
     ~GameScene() override = default;
 };

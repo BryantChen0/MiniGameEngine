@@ -2,6 +2,13 @@
 #include <SDL2/SDL.h>
 //场景管理类和场景接口类
 
+//根据场景状态接口来调整场景的切换
+enum class SceneStatus
+{
+	Running,
+	Finished
+};
+
 class IScene {
 	//使用virtual的原因：
 	//如果不加 virtual：子类可以重写，但通过父类指针调用时会被忽略
@@ -13,6 +20,10 @@ class IScene {
 public:
 	virtual void update(float dt) = 0;//虚函数
 	virtual void render() = 0;
+	virtual SceneStatus getStatus() const
+	{
+		return SceneStatus::Running;
+	}
 	virtual ~IScene() = default;
 };
 

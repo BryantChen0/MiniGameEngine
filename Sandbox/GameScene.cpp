@@ -104,10 +104,6 @@ void GameScene::loadImage()
         image.GetTexture("player");
 }
 
-bool GameScene::isDead() {
-    return gameOver;
-}
-
 void GameScene::reset() {
     gameOver = false;
     score = 0;

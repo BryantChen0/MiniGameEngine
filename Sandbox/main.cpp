@@ -28,10 +28,12 @@ using namespace std;
 
 
 int main(){
+    int windowLength = 800;
+    int windowWidth = 600;
     // 初始化SDL2窗口
     Window window(
         "Mini2D",
-        800,
+        windowLength,
         600
     );
 
@@ -75,20 +77,20 @@ int main(){
         if (inputSystem.quitRequested()) running = false;
 
         //场景切换
-        gameOverScene.setScore(gameScene.getScore());
         sceneManager.update(dt);
-        if (gameScene.isDead()){
-            gameOverScene.reset();
-            sceneManager.switchScene(&gameOverScene);
-        }
-
         auto* scene = sceneManager.getCurrentScene();
-        if (auto* go = dynamic_cast<GameOverScene*>(scene)){
-            sceneManager.update(dt);
-            if (go->needRestart())
+
+        if (scene->getStatus() == SceneStatus::Finished)
+        {
+            if (dynamic_cast<GameScene*>(scene))
             {
-                go->reset();
+                gameOverScene.setScore(gameScene.getScore());
+                sceneManager.switchScene(&gameOverScene);
+            }
+            else if (dynamic_cast<GameOverScene*>(scene))
+            {
                 gameScene.reset();
+                gameOverScene.reset();
                 sceneManager.switchScene(&gameScene);
             }
         }

@@ -35,10 +35,6 @@ void GameOverScene::setScore(int newScore) {
     );
 }
 
-bool GameOverScene::needRestart() const{
-    return restart;
-}
-
 void GameOverScene::reset() {
     restart = false;
 }
