@@ -35,6 +35,16 @@ void GameOverScene::setScore(int newScore) {
     );
 }
 
+SceneStatus GameOverScene::getStatus() const {
+    return restart
+        ? SceneStatus::Finished
+        : SceneStatus::Running;
+}
+
+SceneID GameOverScene::nextScene() const{
+    return SceneID::Game;
+}
+
 void GameOverScene::reset() {
     restart = false;
 }

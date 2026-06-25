@@ -34,7 +34,7 @@ int main(){
     Window window(
         "Mini2D",
         windowLength,
-        600
+        windowWidth
     );
 
     if (TTF_Init() == -1) {
@@ -58,7 +58,19 @@ int main(){
     gameScene.loadImage();
     GameOverScene gameOverScene(inputSystem,renderSystem);
     SceneManager sceneManager;
-    sceneManager.switchScene(&gameScene);
+    sceneManager.registerScene(
+        SceneID::Game,
+        &gameScene
+    );
+
+    sceneManager.registerScene(
+        SceneID::GameOver,
+        &gameOverScene
+    );
+
+    sceneManager.switchScene(
+        SceneID::Game
+    );
 
 
     //游戏主循环的配置
@@ -78,22 +90,6 @@ int main(){
 
         //场景切换
         sceneManager.update(dt);
-        auto* scene = sceneManager.getCurrentScene();
-
-        if (scene->getStatus() == SceneStatus::Finished)
-        {
-            if (dynamic_cast<GameScene*>(scene))
-            {
-                gameOverScene.setScore(gameScene.getScore());
-                sceneManager.switchScene(&gameOverScene);
-            }
-            else if (dynamic_cast<GameOverScene*>(scene))
-            {
-                gameScene.reset();
-                gameOverScene.reset();
-                sceneManager.switchScene(&gameScene);
-            }
-        }
 
         //渲染
         renderSystem.clear({ 255, 255, 255, 255 });

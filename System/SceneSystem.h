@@ -1,12 +1,19 @@
 ﻿#pragma once
 #include <SDL2/SDL.h>
+#include <unordered_map>
 //场景管理类和场景接口类
 
-//根据场景状态接口来调整场景的切换
+//根据场景状态接口来决定场景是否结束
 enum class SceneStatus
 {
 	Running,
 	Finished
+};
+//根据场景状态ID来调整场景切换的目标
+enum class SceneID
+{
+	Game,
+	GameOver
 };
 
 class IScene {
@@ -24,6 +31,7 @@ public:
 	{
 		return SceneStatus::Running;
 	}
+	virtual SceneID nextScene() const = 0;
 	virtual ~IScene() = default;
 };
 
@@ -31,10 +39,12 @@ class SceneManager {
 private:
 	//使用指针，因为编译后需要切换不同的场景，而不是固定下来
 	//同时指针可以指向任何继承IScene的类
-	IScene* currentScene;
+	IScene* currentScene = nullptr;
+	std::unordered_map<SceneID, IScene*> scenes;
 
 public:
-	void switchScene(IScene* newScene);
+	void registerScene(SceneID id, IScene* scene);
+	void switchScene(SceneID id);
 	void update(float dt);
 	void render();
 	IScene* getCurrentScene();

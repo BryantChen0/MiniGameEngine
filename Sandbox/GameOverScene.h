@@ -20,12 +20,8 @@ public:
     void update(float dt) override;
     void render() override;
     void setScore(int newScore);
-    SceneStatus getStatus() const override
-    {
-        return restart
-            ? SceneStatus::Finished
-            : SceneStatus::Running;
-    }
+    SceneStatus getStatus() const override;
+    SceneID nextScene() const override;
     void reset();
     ~GameOverScene() override = default;
 };

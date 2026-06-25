@@ -5,7 +5,6 @@
 #include "../System/InputSystem.h"
 #include "../System/RenderSystem.h"
 #include "../System/ImageSystem.h"
-
 #include "../Core/Object.h"
 #include "iostream"
 
@@ -102,6 +101,16 @@ void GameScene::loadImage()
 
     player.texture =
         image.GetTexture("player");
+}
+
+SceneStatus GameScene::getStatus() const {
+    return gameOver
+        ? SceneStatus::Finished
+        : SceneStatus::Running;
+}
+
+SceneID GameScene::nextScene() const {
+    return SceneID::GameOver;
 }
 
 void GameScene::reset() {
