@@ -25,7 +25,7 @@ add_executable(MiniGameEngine
         System/SceneSystem.cpp
         System/ImageSystem.cpp
         System/ObjectManager.h
-        UI/UIText.cpp)
+        UI/UIText.cpp "Sandbox/GameState.h")
 
 target_compile_definitions(MiniGameEngine PRIVATE SDL_MAIN_HANDLED)
 

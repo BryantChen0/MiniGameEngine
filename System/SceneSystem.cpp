@@ -4,11 +4,11 @@
 #include "PhysicalSystem.h"
 #include "RenderSystem.h"
 
-void SceneManager::registerScene(SceneID id, IScene* scene) {
+void SceneManager::registerScene(std::string id, IScene* scene) {
 	scenes.emplace(id, scene);
 }
 
-void SceneManager::switchScene(SceneID id) {
+void SceneManager::switchScene(std::string id) {
 	currentScene = scenes[id];
 }
 
@@ -20,6 +20,7 @@ void SceneManager::update(float dt) {
 	if (currentScene->getStatus()
 		== SceneStatus::Finished)
 	{
+		currentScene->reset();
 		currentScene =
 			scenes[currentScene->nextScene()];
 	}

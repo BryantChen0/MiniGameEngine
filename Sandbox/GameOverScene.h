@@ -6,6 +6,7 @@
 
 class RenderSystem;
 class UIText;
+class GameState;
 
 class GameOverScene : public IScene {
 private:
@@ -13,15 +14,15 @@ private:
     InputSystem& input;
     UIText gameOverText;
     UIText scoreText;
+    GameState& data;
     bool restart = false;
-    int score = 0;
 public:
-    GameOverScene(InputSystem& inputSystem, RenderSystem& renderSystem);
+    GameOverScene(InputSystem& inputSystem, RenderSystem& renderSystem, GameState& gameState);
     void update(float dt) override;
     void render() override;
-    void setScore(int newScore);
     SceneStatus getStatus() const override;
-    SceneID nextScene() const override;
+    std::string nextScene() const override;
+    std::string getID() const override;
     void reset();
     ~GameOverScene() override = default;
 };

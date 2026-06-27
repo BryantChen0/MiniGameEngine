@@ -6,6 +6,7 @@
 #include "../System/ImageSystem.h"
 #include "GameScene.h"
 #include "GameOverScene.h"
+#include "GameState.h"
 #include "iostream"
 #include <SDL_ttf.h>
 
@@ -25,6 +26,7 @@ using namespace std;
 //5.渲染类基于实体的图片和数据在场景内绘制
 //6.输入类和物理类同时更新实体的数据
 //7.重复第5步和第6步直到达到某个切换场景管理器内储存的场景的条件
+
 
 
 int main(){
@@ -54,22 +56,23 @@ int main(){
     ImageSystem imageSystem;
 
     //游戏场景类初始化
-    GameScene gameScene(inputSystem, physicalSystem, renderSystem, imageSystem, { 800, 600 });
+    GameState gameState;
+    GameScene gameScene(inputSystem, physicalSystem, renderSystem, imageSystem, gameState, { 800, 600 });
     gameScene.loadImage();
-    GameOverScene gameOverScene(inputSystem,renderSystem);
+    GameOverScene gameOverScene(inputSystem,renderSystem, gameState);
     SceneManager sceneManager;
     sceneManager.registerScene(
-        SceneID::Game,
+        gameScene.getID(),
         &gameScene
     );
 
     sceneManager.registerScene(
-        SceneID::GameOver,
+        gameOverScene.getID(),
         &gameOverScene
     );
 
     sceneManager.switchScene(
-        SceneID::Game
+        gameScene.getID()
     );
 
 

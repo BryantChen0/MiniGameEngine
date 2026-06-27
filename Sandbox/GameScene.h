@@ -9,6 +9,7 @@ class InputSystem;
 class PhysicalSystem;
 class RenderSystem;
 class ImageSystem;
+class GameState;
 
 class GameScene : public IScene {
 private:
@@ -20,20 +21,21 @@ private:
     bool gameOver = false;
     float pipeSpawnTimer = 0.0f;
     float pipeSpawnInterval = 2.0f;
-    int score = 0;
     InputSystem& input;
     PhysicalSystem& physical;
     RenderSystem& renderer;
     ImageSystem& image;
+    GameState& data;
 public:
-    GameScene(InputSystem& inputSystem, PhysicalSystem& physicalSystem, RenderSystem& renderSystem, ImageSystem& imageSystem, Vector2 screenSize);
+    GameScene(InputSystem& inputSystem, PhysicalSystem& physicalSystem, RenderSystem& renderSystem, ImageSystem& imageSystem, GameState& gameState, Vector2 screenSize);
     void spawnPipe();
     void update(float dt) override;
     void render() override;
     void loadImage();
-    int getScore() { return score; }
+    int getScore();
     SceneStatus getStatus() const override;
-    SceneID nextScene() const override;
+    std::string nextScene() const override;
+    std::string getID() const override;
     void reset();
     ~GameScene() override = default;
 };

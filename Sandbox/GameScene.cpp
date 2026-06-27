@@ -6,14 +6,16 @@
 #include "../System/RenderSystem.h"
 #include "../System/ImageSystem.h"
 #include "../Core/Object.h"
+#include "GameState.h"
 #include "iostream"
 
-GameScene::GameScene(InputSystem& inputSystem, PhysicalSystem& physicalSystem, RenderSystem& renderSystem, ImageSystem& imageSystem, Vector2 screenSize)
+GameScene::GameScene(InputSystem& inputSystem, PhysicalSystem& physicalSystem, RenderSystem& renderSystem, ImageSystem& imageSystem, GameState& gameState, Vector2 screenSize)
     : player(inputSystem, { 80, 40 }, { 0, 200 }, { 0, 0 }),
     input(inputSystem),
     physical(physicalSystem),
     renderer(renderSystem),
-    image(imageSystem)
+    image(imageSystem),
+    data(gameState)
     //构造函数初始化列表（Constructor Initialization List）
 {
     screenWidth = screenSize.x;
@@ -67,11 +69,10 @@ void GameScene::update(float dt){
         //得分机制
         if (!pipe.scored && player.position.x > pipe.position.x)
         {
-            score++;
+            data.score++;
             pipe.scored = true;
         }
     }
-
 
     //清除离开屏幕的管道
     pipes.removeDead();
@@ -103,19 +104,26 @@ void GameScene::loadImage()
         image.GetTexture("player");
 }
 
+int GameScene::getScore() {
+    return data.score;
+}
+
 SceneStatus GameScene::getStatus() const {
     return gameOver
         ? SceneStatus::Finished
         : SceneStatus::Running;
 }
 
-SceneID GameScene::nextScene() const {
-    return SceneID::GameOver;
+std::string GameScene::nextScene() const {
+    return "GameOver";
+}
+
+std::string GameScene::getID() const {
+    return "Game";
 }
 
 void GameScene::reset() {
     gameOver = false;
-    score = 0;
 
     player.position = { 80, 200 };
     player.velocity = { 0, 0 };
