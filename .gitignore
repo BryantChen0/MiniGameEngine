@@ -14,6 +14,7 @@ _deps/
 
 # CMake user/local config
 CMakeLists.txt.user
+CMakeSettings.json
 CMakeUserPresets.json
 
 # Build directories
