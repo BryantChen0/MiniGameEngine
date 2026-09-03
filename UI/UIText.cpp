@@ -8,7 +8,7 @@ UIText::UIText(RenderSystem& renderSystem, const std::string& s, int x, int y, i
     text(s)
 {
     rect = { x, y, length, width };
-    setFont("assets/fonts/arial.ttf", 48);
+    setFont("Assets/Fonts/arial.ttf", 48);
     setTexture(text);
 }
 
@@ -18,7 +18,7 @@ void UIText::render() {
 
 void UIText::setFont(std::string fontPath, int fontSize) {
     font = TTF_OpenFont(
-        "assets/fonts/arial.ttf",
+        "Assets/Fonts/arial.ttf",
         48
     );
 

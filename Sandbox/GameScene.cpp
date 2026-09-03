@@ -90,9 +90,9 @@ void GameScene::render(){
 
 void GameScene::loadImage()
 {
-    bool ok1 = image.LoadTexture("player", "player.png", renderer);
-    bool ok2 = image.LoadTexture("topPipe", "topPipe.png", renderer);
-    bool ok3 = image.LoadTexture("bottomPipe", "bottomPipe.png", renderer);
+    bool ok1 = image.LoadTexture("player", "Assets/Images/player.png", renderer);
+    bool ok2 = image.LoadTexture("topPipe", "Assets/Images/topPipe.png", renderer);
+    bool ok3 = image.LoadTexture("bottomPipe", "Assets/Images/bottomPipe.png", renderer);
 
     if (!ok1 || !ok2 || !ok3)
     {

@@ -27,7 +27,8 @@ add_executable(MiniGameEngine
         System/SceneSystem.cpp
         System/ImageSystem.cpp
         System/ObjectManager.h
-        UI/UIText.cpp "Sandbox/GameState.h")
+        UI/UIText.cpp 
+        Sandbox/GameState.h)
 
 target_compile_definitions(MiniGameEngine PRIVATE SDL_MAIN_HANDLED)
 
@@ -36,4 +37,10 @@ target_link_libraries(MiniGameEngine PRIVATE
         SDL2::SDL2main
         SDL2_image::SDL2_image
         SDL2_ttf::SDL2_ttf
+)
+
+add_custom_command(TARGET MiniGameEngine POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_SOURCE_DIR}/Assets"
+        "$<TARGET_FILE_DIR:MiniGameEngine>/Assets"
 )
